@@ -29,11 +29,11 @@ public class Readsheetxl {
 	        try
 	        {	
 	        	
-	        	BufferedWriter writer = new BufferedWriter(new FileWriter(new File("c:/xls/script.sql")));
+	        	BufferedWriter writer = new BufferedWriter(new FileWriter(new File("b:/script3.sql")));
 	        	//writer.close();
 	        	
 	        	// Opening of the xls file
-	        	File xlsDocument = new File("c:/xls/Correspondance_FR_contrat_ancien_nouveau.xls");
+	        	File xlsDocument = new File("C:/Users/ShdwBt/Documents/GitHub/importCSV/lib/Correspondance_FR_contrat_ancien_nouveau.xls");
 	        	
 	        	// Get the settings characterizing an excel document or Excel interface ??
 	        	
@@ -67,9 +67,23 @@ public class Readsheetxl {
 	        	for (int i = 1; i < readSheet.getRows(); i++){
 	        		for (int j = 0; j < readSheet.getColumns(); j++){
 	        			Cell cell = readSheet.getCell(j, i);
-	        			//int cellString = Integer.parseInt(cell.toString());
-	        			//writer.write(cellString);
-	        			writer.write("adaaad");
+	        			/*writer.write(String.valueOf(cell.getContents()));
+	        			writer.write("\r\n"); // a la ligne */ //chaque colonne surune ligne du fichier
+	        			
+	        			// get toutes les colonnes -> but : supp la premiere et use sql concat pour les 2 autres
+	        			
+	        			// vrai but faire la comparaison avec concat('000', column1) catch dans le script.sql
+	        			// sinon udpate compte avec old_cpt_number (+ '000' avec concat ?) catch dans le script
+	        			
+	        			// recup du code du script local infile
+	        			
+	        			// http://www.ukonline.be/programmation/java/tutoriel/chapitre12/page4.php
+	        			// http://www.commentcamarche.net/forum/affich-1165710-java-ecrire-dans-un-fichier ....
+	        			
+	        			// COURS http://www.jmdoudoux.fr/java/dej/chap-flux.htm !!!
+	        			writer.write(String.valueOf("UPDATE compte set cpt_numero = " + readSheet.getCell(j,i).getContents()));
+	        			writer.write("\r\n");
+	        			
 	        			System.out.print(cell.getContents()+" ");
 	        		}
 	        		System.out.println();
